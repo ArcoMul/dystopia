@@ -1,0 +1,184 @@
+* {
+	margin:0;
+	padding:0;
+}
+html {
+	overflow: hidden;
+}
+body {
+	background: -webkit-radial-gradient(center, ellipse cover, #DAFAFF 0%,#59E4FF 100%);
+	font-family: 'Exo', sans-serif;
+}
+
+br.clear {
+	clear:both;
+}
+
+#skillset, #shop-button {
+	background-color: white;
+	position: absolute;
+	bottom: 20px;
+	padding: 0 5px;
+}
+
+#skillset .skill, #shop-button div {
+	width: 50px;
+	height: 50px;
+	background-color: #CCC;
+	margin: 10px 5px 10px 5px;
+	float: left;
+}
+#skillset .skill:hover, #shop-button div:hover {
+	background-color: #fff;
+	margin: 5px 0px 5px 0px;
+	border: 5px solid #FFBF37;
+	cursor: pointer;
+}
+
+#shop-button div {
+	background-image:url(../img/shop-star.png);
+}
+
+/* Score Fear */
+#score-fear {
+	top: 20px;
+	right: 20px;
+	padding: 5px;
+	position: absolute;
+	font-size: 75px;
+	color: white;
+	font-family: 'Paytone One', sans-serif;
+}
+#score-fear img {
+	margin-right: 20px;
+	float: left;
+}
+#score-fear span, #planet-fear span {
+	margin-top: -10px;
+	float: left;
+	display: block;
+}
+
+/* Planet Fear */
+#planet-fear {
+	top: 20px;
+	left: 20px;
+	padding: 5px;
+	position: absolute;
+	font-size: 75px;
+	color: white;
+	font-family: 'Paytone One', sans-serif;
+}
+
+/* Info */
+#info-container .info {
+	position: absolute;
+	background-color: white;
+	font-family: 'Exo', sans-serif;
+	font-size: 35px;
+	padding: 0 13px;
+	color: black;
+	font-weight: lighter;
+}
+#info-container .info .arrow {
+	position: absolute;
+	right: -8px;
+	top: 15px;
+	background-image: url(../img/score-fear-arrow.png);
+	width: 8px;
+	height: 16px;
+}
+#info-container .info.right .arrow {
+	left: -8px;
+	background-image: url(../img/score-fear-arrow-right.png);
+}
+#info-container .info.top .arrow {
+	bottom: -8px;
+	top: auto;
+	width:16px;
+	height:8px;
+	background-image: url(../img/score-fear-arrow-top.png);
+}
+
+#info-container .info.small {
+	max-width: 200px;
+	font-size: 13px;
+	font-weight: normal;
+	padding: 9px 13px;
+	text-align: center;
+	line-height: 20px;
+}
+
+/* Shop */
+#shop {
+	position: absolute;
+}
+#shop .content {
+	background-color: white;
+	padding: 50px;
+	width: 800px;
+}
+#shop .content h2 {
+	padding-bottom: 10px;
+}
+#shop .content .close {
+	position: absolute;
+	right: 20px;
+	top: 5px;
+	font-size: 28px;
+	color: #818181;
+	cursor: pointer;
+}
+#shop .content .close:hover {
+	color: #111;
+}
+#shop .content .left, #shop .content .right {
+	width: 394px;
+	float:left;
+}
+#shop .content .left {
+	border-right: 2px solid #bbb;
+	clear: left;
+	padding-right: 5px;
+}
+#shop .content .right {
+	padding-left: 5px;
+}
+
+#shop .content div.skill {
+	background-color: #EEE;
+	padding: 15px;
+	margin-bottom: 5px;
+}
+#shop .content div.skill.bought {
+	opacity: 0.5;
+}
+#shop .content div.skill .img {
+	float:left;
+}
+#shop .content div.skill .info {
+	float:left;
+	width: 240px;
+}
+#shop .content div.skill p {
+	font-size: 13px;
+	text-align: left;
+}
+#shop .content div.skill button {
+	font-family: 'Exo', sans-serif;
+	font-size: 14px;
+	border: 0;
+	background-color: #74C7FF;
+	padding: 5px;
+	float: right;
+	cursor: pointer;
+	margin-top: 9px;
+}
+#shop .content div.skill.bought button {
+	cursor: default;
+}
+#shop .content div.skill button.no-click {
+	cursor: default;
+	color: #686868;
+	background-color: #C2C2C2;
+}
