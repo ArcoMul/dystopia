@@ -5,4 +5,4 @@ This is a WebGL game I made during lessons in Game Design. For an assignment you
 
 Feel free to check/use/change the code and the models.
 
-(Actually this is just an easy way to host my code, since I should be downloadable :-D)
+(Actually this is just an easy way to host my code, since it should be downloadable :-D)
