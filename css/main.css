@@ -182,3 +182,14 @@ br.clear {
 	color: #686868;
 	background-color: #C2C2C2;
 }
+
+#end-of-game {
+	position: absolute;
+	left: 0;
+	top: 250px;
+	font-size: 90px;
+	font-family: 'Paytone One';
+	width:100%;
+	text-align: center;
+	color:#fff;
+}

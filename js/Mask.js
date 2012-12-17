@@ -8,6 +8,9 @@ var Mask = function(loaded)
 	
 	this.turnX = 0;
 	this.turnY = 0;
+	
+	this.mayMove = true;
+	
 	this.init();
 }
 
@@ -26,6 +29,10 @@ Mask.prototype.update = function() {
 
 Mask.prototype.moveForward = function() {
 	
+	if(!this.mayMove) {
+		return;
+	}
+	
 	// Move the bloody thing forward
 	this.move(new THREE.Vector3(toRadian(this.turnX), toRadian(this.turnY), toRadian(1)));
 	
@@ -35,6 +42,11 @@ Mask.prototype.moveForward = function() {
 }
 	
 Mask.prototype.moveBackward = function() {
+	
+	if(!this.mayMove) {
+		return;
+	}
+	
 	this.move(new THREE.Vector3(toRadian(this.turnX), toRadian(this.turnY), toRadian(-1)));
 }
 

@@ -1,4 +1,4 @@
-var Human = function(loaded)
+var President = function(loaded)
 {
 	this.model;
 	this.loaded = loaded;
@@ -6,18 +6,52 @@ var Human = function(loaded)
 	this.texture = 'models/textures/human-uv.png';
 	this.startPosition = false;
 	this.isScared = false;
+	this.guards = [];
+	
 	this.init();
 }
 
-Human.prototype = new Dystopia.Object3D();
+President.prototype = new Dystopia.Object3D();
 
-Human.prototype.init = function()
+President.prototype.init = function()
 {
 	this.load();
 }
 
-Human.prototype.update = function()
+President.prototype._loaded = function(model)
 {
+	var self = this;
+	
+	// The blue material
+	var blueMat = new THREE.MeshBasicMaterial({color: 0x5b89ff});
+	
+	// Give all its meshes the right materail / color
+	for(var i = 0; i < model.children.length; i++) {
+		model.children[i].material = blueMat;
+	}
+	
+	for(var i = 0; i < 2; i++) {
+		this.guards.push(new Guard(function(_model) {
+			self.model.add(_model);
+			_model.position = model.position.clone();
+			_model.rotation = model.rotation.clone();
+			_model.position.x += -1 + (i * 2);
+			_model.lookAt(planet.model.position);
+		}));
+	}
+	
+	this.loaded(model);
+}
+
+President.prototype.update = function()
+{
+	var self = this;
+		_.each(trees, function(tree) {
+			var distance = tree.model.position.distanceTo(self.model.position);
+			if(distance < 10 && tree.isDestroyed) {
+				tree.heal();
+			}
+		});
 	
 	if(this.direction && this.model.position && this.model.rotation && this.startPosition)
 	{
@@ -26,17 +60,12 @@ Human.prototype.update = function()
 	
 	if(this.model.position && !this.startPosition)
 	{
-		this.move(new THREE.Vector3(
-			toRadian(-180 + (Math.random() * 360)),
-			toRadian(-180 + (Math.random() * 360)),
-			toRadian(-180 + (Math.random() * 360))
-		));
 		this.direction = new THREE.Vector3(toRadian(-0.5 + (Math.random() * 1)), toRadian(-0.5 + (Math.random() * 1)), toRadian(-0.5 + (Math.random() * 1)));
 		this.startPosition = true;
 	}
 }
 
-Human.prototype.dropFear = function()
+President.prototype.dropFear = function()
 {
 	console.log('Human: drop fear');
 	
@@ -51,15 +80,10 @@ Human.prototype.dropFear = function()
 	}))
 }
 
-Human.prototype.scare = function(n)
+President.prototype.scare = function(n)
 {
 	console.log('Human: scare');
 	var self = this;
-	
-	if(this.model.children[1].scale.z < 0.513) {
-		planet.model.remove(this.model);
-		return;
-	}
 	
 	if(this.isScared) {
 		return;
@@ -103,11 +127,5 @@ Human.prototype.scare = function(n)
 		count++;
 	}, 500);
 	
-	this.model.children[1].scale.multiplyScalar(0.8);
 	
-	// 0.512
-	
-	
-	
-	console.log('Human scale:', this.model.children[1].scale.z);
 }

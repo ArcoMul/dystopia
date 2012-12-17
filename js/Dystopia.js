@@ -2,6 +2,7 @@ var Dystopia = {
 	Object3D: function()
 	{
 		this.opacity = 1;
+		this.mayMove = true;
 		
 		this.load = function()
 		{
@@ -31,6 +32,9 @@ var Dystopia = {
 		this._loaded = function(model) { this.loaded(model); }
 		
 		this.move = function(direction, axis) {
+			if(!this.mayMove) {
+				return false;
+			}
 			axis = axis || "XYZ";
 			var m4 = new THREE.Matrix4().setRotationFromEuler(direction, axis);
 			m4.multiplySelf(this.model.matrix);

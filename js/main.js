@@ -16,7 +16,13 @@ var renderer, camera, scene;
 
 var planet, tree;
 
-var humans = [], clouds = [], fears = [], trees = [];
+var humans = [],
+	clouds = [],
+	fears = [],
+	trees = [],
+	houses = [],
+	whiteHouse,
+	president;
 
 var EXPLORE = 1,
 	SKILL = 2;
@@ -71,33 +77,11 @@ function init()
 		
 		model.children[1].on('click', function(){
 			console.log("Planet: click");
-			
 		});
-		
-		// Create tree
-		// tree = new Tree(function(model){
-			// planet.model.add(model);
-			// model.position.y = planet.radius - 1;
-			// model.lookAt(planet.model.position);
-			// model.children[1].on('click', function(e){
-				// if(skillSet.inUse(skillSet.DESTROYTREE)) {
-					// skillSet.skills[skillSet.DESTROYTREE].destroy(tree);
-				// }
-			// });
-		// });
 		
 		// Create trees
 		for(var i = 0; i < 3; i++) {
-			trees.push(new Tree(function(model){
-				var self = this;
-				
-				planet.model.add(model);
-				model.children[1].on('click', function(e){
-					if(skillSet.inUse(skillSet.DESTROYTREE)) {
-						skillSet.skills[skillSet.DESTROYTREE].destroy(self);
-					}
-				});
-			}));
+			planet.spawnTree();
 		}
 		
 		// Create clouds
@@ -111,11 +95,7 @@ function init()
 		
 		// Create humans
 		for(var i = 0; i < 5; i++) {
-			humans.push(new Human(function(model){
-				planet.model.add(model);
-				model.position.x = planet.radius - 1;
-				model.lookAt(planet.model.position);
-			}));
+			planet.spawnHuman();
 		}
 	});
 	
@@ -124,6 +104,18 @@ function init()
 	realWindow = window.parent || window;
 	realWindow.addEventListener( 'keydown', keys.event.down, false );
 	realWindow.addEventListener( 'keyup', keys.event.up, false );
+	$('body').bind('mousewheel', function(e){
+		
+		var factor;
+		
+		if(e.originalEvent.wheelDelta > 0) {
+			factor = 0.9;
+		} else {
+			factor = 1.1;
+		}
+		
+		camera.position.multiplyScalar(factor);
+	});
 	
 	animate();
 	
@@ -132,32 +124,6 @@ function init()
 $(window).load(function(){
 	assetsLoaded = true;
 	Info.build();
-	
-	// $(".hasTooltip").each(function(){
-		// if($("#info-container").length == 0)
-			// $("body").append('<div id="info-container" />')
-// 		
-		// var data = $(this).data("info");
-		// var offset = $(this).offset();
-		// $("#info-container").append('<div class="info">' + data + '<div class="arrow" /></div>');
-		// $elm = $("#info-container").children().last();
-		// var top;
-		// var left;
-		// if($(this).hasClass("right")) {
-			// $elm.addClass("right");
-			// top = offset.top + (($(this).height() - $elm.height()) / 2);
-			// left = offset.left + $elm.width() + 20;
-		// } else {
-			// top = offset.top + (($(this).height() - $elm.height()) / 2);
-			// left = offset.left - $elm.width() - 60;
-		// }
-		// $elm.css({
-			// left: left,
-			// top: top
-		// });
-	// });
-	
-	
 });
 
 var keys = {
@@ -193,24 +159,48 @@ function update()
 	
 	keys.update();
 	
-	if(clouds.length > 0)
-		for(var i = 0; i < clouds.length; i++)
-			clouds[i].update();
+	if(clouds.length > 0) {
+		_.each(clouds, function(cloud) {
+			cloud.update();
+		});
+	}	
 	
 	if(skillSet.inUse(skillSet.MASK)) {
 		skillSet.skills[skillSet.MASK].update();
 	}
 	
-	if(humans.length > 0)
-		for(var i = 0; i < humans.length; i++)
-			humans[i].update();
+	if(humans.length > 0) {
+		_.each(humans, function(human) {
+			human.update();
+		});
+	}
 	
-	if(fears.length > 0)
-		for(var i = 0; i < fears.length; i++)
-			fears[i].update();
+	if(fears.length > 0) {
+		_.each(fears, function(fear) {
+			fear.update();
+		});
+	}
+	
+	if(president && president.model && president.model.position) {
+		president.update();
+	}
+	
+	if(whiteHouse && whiteHouse.model && whiteHouse.model.position && cameraOnWhiteHouse) {
+		camera.position = whiteHouse.model.position.clone().multiplyScalar(15);
+		camera.lookAt(whiteHouse.model.position);
+	}
 	
 	TWEEN.update();
 }
+
+/**
+ * Grow planet every 5 seconds
+ */
+setInterval(function(){
+	if(planet.model.position) {
+		planet.grow();
+	}
+}, 5000);
 
 function render() 
 {	
