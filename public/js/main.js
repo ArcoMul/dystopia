@@ -44,6 +44,7 @@ function init()
 	var snd = new Audio('sound/background.wav');
 	snd.play();
 	snd.volume = 0.4;
+	snd.loop = true;
 
 	WIDTH = $(window).width();
   	HEIGHT = $(window).height();
