@@ -64,6 +64,10 @@ Human.prototype.scare = function(n)
 	if(this.isScared) {
 		return;
 	}
+
+	// Scream
+	var snd = new Audio("sound/scream.mp3"); // buffers automatically when created
+	snd.play();
 	
 	// Define that this human is scared at the moment
 	this.isScared = true;

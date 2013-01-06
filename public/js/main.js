@@ -41,6 +41,10 @@ var planetFear = new PlanetFear();
 
 function init()
 {
+	var snd = new Audio('sound/background.wav');
+	snd.play();
+	snd.volume = 0.4;
+
 	WIDTH = $(window).width();
   	HEIGHT = $(window).height();
   	ASPECT = WIDTH / HEIGHT;
