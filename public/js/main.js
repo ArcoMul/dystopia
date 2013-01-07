@@ -39,12 +39,14 @@ var shop = new Shop();
 var fearScore = new FearScore();
 var planetFear = new PlanetFear();
 
+var backgroundMusic;
+
 function init()
 {
-	var snd = new Audio('sound/background.wav');
-	snd.play();
-	snd.volume = 0.4;
-	snd.loop = true;
+	backgroundMusic = new Audio('sound/background.wav');
+	backgroundMusic.play();
+	backgroundMusic.volume = 0.4;
+	backgroundMusic.loop = true;
 
 	WIDTH = $(window).width();
   	HEIGHT = $(window).height();

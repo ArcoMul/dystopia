@@ -54,8 +54,13 @@ Planet.prototype.grow = function()
 	
 	var scaleFactor = 1.1 - (this.size * 0.005);
 	
-	if(scaleFactor <= 1 && $('#end-of-game').length == 0) {
+	if(scaleFactor <= 1.08 && $('#end-of-game').length == 0) {
+		$("body").append("<img src='img/explosion.gif' id='explosion' />");
 		$("body").append("<div id='end-of-game'>End of game!</div>");
+		backgroundMusic.pause();
+		var snd = new Audio('sound/scream.mp3');
+		snd.loop = true;
+		snd.play();
 	}
 	
 	var from = {
