@@ -112,6 +112,7 @@ br.clear {
 /* Shop */
 #shop {
 	position: absolute;
+	z-index: 99;
 }
 #shop .content {
 	background-color: white;
