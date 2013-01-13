@@ -30,22 +30,22 @@ Tree.prototype._loaded = function(model) {
 	));
 	
 	if(!this.startPosition) {
-	new TWEEN.Tween({x: this.model.position.x, y: this.model.position.y, z: this.model.position.z})
-	    .to({
-	    	x: this.model.position.x * ((planet.radius - 1) / 1),
-	    	y: this.model.position.y * ((planet.radius - 1) / 1),
-	    	z: this.model.position.z * ((planet.radius - 1) / 1)
-	    }, 1000)
-	    .easing(TWEEN.Easing.Exponential.In)
-	    .onUpdate(function () {
-			self.model.position.x = this.x;
-			self.model.position.y = this.y;
-			self.model.position.z = this.z;
-	    })
-	    .onComplete(function(){
-	    	this.startPosition = true;
-	    })
-	    .start();
+		new TWEEN.Tween({x: this.model.position.x, y: this.model.position.y, z: this.model.position.z})
+		    .to({
+		    	x: this.model.position.x * ((planet.radius - 1) / 1),
+		    	y: this.model.position.y * ((planet.radius - 1) / 1),
+		    	z: this.model.position.z * ((planet.radius - 1) / 1)
+		    }, 1000)
+		    .easing(TWEEN.Easing.Exponential.In)
+		    .onUpdate(function () {
+				self.model.position.x = this.x;
+				self.model.position.y = this.y;
+				self.model.position.z = this.z;
+		    })
+		    .onComplete(function(){
+		    	self.startPosition = true;
+		    })
+		    .start();
 	}
 	    
 	this.loaded(model);
