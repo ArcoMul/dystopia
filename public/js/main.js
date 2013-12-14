@@ -44,7 +44,7 @@ var backgroundMusic;
 function init()
 {
 	backgroundMusic = new Audio('sound/background.wav');
-	backgroundMusic.play();
+	// backgroundMusic.play();
 	backgroundMusic.volume = 0.4;
 	backgroundMusic.loop = true;
 
